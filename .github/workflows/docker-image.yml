@@ -19,7 +19,10 @@ jobs:
 
 
     - name: Run the Docker image as Container
-      run: docker run -it docker-image-pipeline
+      run: docker run --name docker-container docker-image-pipeline
 
     - name: Finish Up
-      run: echo 'finished..'
+      run: |
+        docker rm docker-container
+        docker rmi docker-image-pipeline
+        echo 'finished..'
